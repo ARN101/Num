@@ -7,11 +7,13 @@ Two fundamental iterative techniques are the **Jacobi Method** and the **Gauss-S
 
 ### A. Jacobi Iterative Method
 
-#### Mathematical Theory
 The Jacobi method is a method of **simultaneous displacement**. To find the $k+1$ approximation for the variable $x_i$, the method uses **only** the values from the previous iteration $k$.
 
 **Formula:**
+
+
 $$x_i^{(k+1)} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1, j \ne i}^{n} a_{ij} x_j^{(k)} \right), \quad i = 1, \dots, n$$
+
 
 #### Algorithm
 1.  **Input:** Matrix $A$, Vector $b$, Initial guess $x^{(0)}$, Tolerance $\epsilon$, Max Iterations $N$.
@@ -24,6 +26,44 @@ $$x_i^{(k+1)} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1, j \ne i}^{n} a_{ij} x_j
     * **Update:** Set $x = x\_new$.
     * **Stop Condition:** If $Error < \epsilon$, break loop.
 4.  **Output:** Solution vector $x$.
+
+#### Pseudocode
+```text
+FUNCTION Jacobi(A, b, x0, tol, max_iter)
+    n = length(b)
+    x = x0
+    
+    FOR k = 1 TO max_iter DO
+        x_new = copy(x) // Important: Store updates in a separate array
+        
+        FOR i = 0 TO n-1 DO
+            sum = 0
+            FOR j = 0 TO n-1 DO
+                IF j != i THEN
+                    sum = sum + A[i][j] * x[j] // Uses OLD x values
+                END IF
+            END FOR
+            
+            x_new[i] = (b[i] - sum) / A[i][i]
+        END FOR
+        
+        // Check for convergence
+        max_diff = 0
+        FOR i = 0 TO n-1 DO
+            max_diff = MAX(max_diff, ABS(x_new[i] - x[i]))
+        END FOR
+        
+        x = x_new // Update x for the next iteration
+        
+        IF (max_diff < tol) THEN
+            RETURN x
+        END IF
+    END FOR
+    
+    PRINT "Max iterations reached"
+    RETURN x
+END FUNCTION
+```
 
 ### B. Gauss-Seidel Iterative Method
 
