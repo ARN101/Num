@@ -383,7 +383,6 @@ a_2
 \sum x^2y
 \end{bmatrix}
 $$
-
 **Algorithm**
 1.  **Select Degree $m$:** Choose the order of the polynomial (e.g., $m=2$ for a parabola).
 2.  **Calculate Power Sums:** Compute sums for $x$ up to power $2m$ ($\sum x, \sum x^2, \dots \sum x^{2m}$).
@@ -415,7 +414,7 @@ For i from 0 to m:
 // 4. Solve B * a = C
 coefficients = GaussianElimination(B, C)
 Return coefficients
-
+```
 
 **Further Study**
 * [Polynomial Regression - GeeksforGeeks](https://www.geeksforgeeks.org/polynomial-regression-for-non-linear-data-ml/)
