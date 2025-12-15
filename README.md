@@ -149,3 +149,99 @@ Output: Derivative value dy/dx
 **Further Study**
 * [Newton’s Forward Difference Formula for Differentiation - GeeksforGeeks](https://www.geeksforgeeks.org/newtons-forward-difference-formula-for-differentiation/)
 * [Numerical Differentiation - Math.OHIO.edu](https://web.math.ohio.edu.cn/~courses/math3600/Lecture13.pdf)
+
+## F. Numerical Integration
+
+Numerical integration, often called "numerical quadrature," is the process of calculating the approximate value of a definite integral $\int_{a}^{b} f(x) dx$. While analytical calculus finds the exact area under a curve using antiderivatives, numerical methods sum the areas of geometric shapes (like trapezoids or parabolas) fitted under the curve.
+
+This is critical in simulations where $f(x)$ is not a simple formula but a stream of data points (e.g., calculating distance from a velocity-time log).
+
+### 1. Simpson’s 1/3 Rule
+
+**Theory: Parabolic Approximation**
+Simpson’s 1/3 Rule improves upon the Trapezoidal Rule by approximating the function $f(x)$ not as a straight line, but as a **second-order polynomial (parabola)** connecting every three points.
+
+
+
+Because it fits parabolas, it requires an **even number of segments** (intervals) $n$, which means you need an odd number of data points. The formula weights the boundary points and internal points differently to achieve higher accuracy.
+
+$$I \approx \frac{h}{3} \left[ (y_0 + y_n) + 4(y_1 + y_3 + \dots + y_{n-1}) + 2(y_2 + y_4 + \dots + y_{n-2}) \right]$$
+
+**Algorithm**
+1.  **Verify Intervals:** Ensure the number of intervals $n$ is even. If $n$ is odd, this method cannot be applied directly over the whole range.
+2.  **Calculate Step Size:** $h = (b - a) / n$.
+3.  **Sum Extremes:** Add the first ($y_0$) and last ($y_n$) values.
+4.  **Sum Odds:** Multiply the sum of ordinates at odd positions ($y_1, y_3...$) by 4.
+5.  **Sum Evens:** Multiply the sum of ordinates at even positions ($y_2, y_4...$) by 2.
+6.  **Calculate Total:** Sum all components and multiply by $h/3$.
+
+**Pseudocode**
+```text
+Input: Function f(x), lower_limit a, upper_limit b, intervals n
+Output: Integral value
+
+If n % 2 != 0:
+    Print "Error: n must be even"
+    Return
+
+h = (b - a) / n
+sum = f(a) + f(b) // First and last terms
+
+For i from 1 to n-1:
+    x = a + i * h
+    If i % 2 == 0:
+        sum = sum + 2 * f(x) // Even index
+    Else:
+        sum = sum + 4 * f(x) // Odd index
+
+Result = sum * (h / 3)
+Return Result
+```
+**Further Study**
+* [Simpson’s 1/3 Rule - GeeksforGeeks (Implementation)](https://www.geeksforgeeks.org/program-simpsons-13-rule/)
+* [Simpson's Rule Derivation - Wolfram MathWorld](https://mathworld.wolfram.com/SimpsonsRule.html)
+
+### 2. Simpson’s 3/8 Rule
+
+**Theory: Cubic Approximation**
+While the 1/3 rule uses parabolas (3 points), Simpson’s 3/8 Rule fits a **third-order polynomial (cubic curve)** through every four points. This generally provides slightly better accuracy for functions that are smoother.
+
+
+
+The constraint for this method is that the number of intervals $n$ must be a **multiple of 3**.
+
+$$I \approx \frac{3h}{8} \left[ (y_0 + y_n) + 3(y_1 + y_2 + y_4 + y_5 + \dots) + 2(y_3 + y_6 + \dots) \right]$$
+
+**Algorithm**
+1.  **Verify Intervals:** Ensure $n$ is a multiple of 3.
+2.  **Calculate Step Size:** $h = (b - a) / n$.
+3.  **Sum Extremes:** Add $y_0$ and $y_n$.
+4.  **Sum Multiples of 3:** Multiply terms at indices divisible by 3 ($y_3, y_6...$) by 2.
+5.  **Sum Others:** Multiply all remaining terms ($y_1, y_2, y_4, y_5...$) by 3.
+6.  **Calculate Total:** Sum components and multiply by $3h/8$.
+
+**Pseudocode**
+```text
+Input: Function f(x), lower_limit a, upper_limit b, intervals n
+Output: Integral value
+
+If n % 3 != 0:
+    Print "Error: n must be divisible by 3"
+    Return
+
+h = (b - a) / n
+sum = f(a) + f(b)
+
+For i from 1 to n-1:
+    x = a + i * h
+    If i % 3 == 0:
+        sum = sum + 2 * f(x) // Multiple of 3
+    Else:
+        sum = sum + 3 * f(x) // Rest of the terms
+
+Result = sum * (3 * h / 8)
+Return Result
+```
+**Further Study**
+* [Simpson’s 3/8 Rule - GeeksforGeeks](https://www.geeksforgeeks.org/simpsons-38-rule-python/)
+* [Numerical Integration Rules - Swarthmore College](https://lpsa.swarthmore.edu/NumInt/NumIntMain.html)
