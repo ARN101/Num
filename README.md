@@ -365,7 +365,9 @@ Although this looks non-linear in terms of $x$, it is **linear in terms of the c
 
 For a 2nd-degree polynomial (Parabola: $y = a_0 + a_1x + a_2x^2$), the matrix system is:
 
-$$
+For a 2nd-degree polynomial (Parabola: $y = a_0 + a_1x + a_2x^2$), the matrix system is:
+
+```math
 \begin{bmatrix}
 n & \sum x & \sum x^2 \\
 \sum x & \sum x^2 & \sum x^3 \\
@@ -382,7 +384,7 @@ a_2
 \sum xy \\
 \sum x^2y
 \end{bmatrix}
-$$
+```
 **Algorithm**
 1.  **Select Degree $m$:** Choose the order of the polynomial (e.g., $m=2$ for a parabola).
 2.  **Calculate Power Sums:** Compute sums for $x$ up to power $2m$ ($\sum x, \sum x^2, \dots \sum x^{2m}$).
