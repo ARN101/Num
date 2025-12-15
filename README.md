@@ -94,3 +94,58 @@ For k from 1 to N:
 * [Gauss-Seidel Method - GeeksforGeeks](https://www.geeksforgeeks.org/gauss-seidel-method/)
 * [Iterative Methods: Jacobi vs Gauss-Seidel - Math LibreTexts](https://math.libretexts.org/Bookshelves/Linear_Algebra/Introduction_to_Matrix_Algebra_(Kaw)/01%3A_Chapters/1.08%3A_Gauss-Seidel_Method)
 
+## D. Numerical Differentiation
+
+Numerical differentiation is the process of calculating the derivative (rate of change) of a function using a set of discrete data points $(x_i, y_i)$ rather than an analytical formula. This is essential in real-world engineering where the underlying function is often unknown (e.g., sensor data) or too complex to differentiate manually.
+
+Instead of taking the limit as $h \to 0$ analytically, we approximate the slope using finite steps $h$.
+
+### 1. Equal-Interval Interpolation Method
+
+**Theory: Differentiating the Polynomial**
+When data points are spaced equally (with a constant step size $h$), we can approximate the function $f(x)$ using Newton's Interpolation formulas (Forward or Backward) and then differentiate that polynomial.
+
+For a point $x$ near the beginning of the data set, we use **Newton's Forward Difference formula**. The first derivative is approximated as:
+
+$$\frac{dy}{dx} = \frac{1}{h} \left[ \Delta y_0 + \frac{2p-1}{2} \Delta^2 y_0 + \frac{3p^2-6p+2}{6} \Delta^3 y_0 + \dots \right]$$
+
+Where $p = \frac{x - x_0}{h}$.
+If we are calculating the derivative exactly at a tabulated point ($x = x_0$, so $p=0$), the formula simplifies significantly to:
+$$f'(x_0) \approx \frac{1}{h} \left( \Delta y_0 - \frac{1}{2}\Delta^2 y_0 + \frac{1}{3}\Delta^3 y_0 - \dots \right)$$
+
+**Algorithm**
+1.  **Check Interval:** Verify that all $x$ values have a constant difference $h$.
+2.  **Difference Table:** Construct the Forward Difference Table ($\Delta$) if $x$ is near the start, or Backward Difference Table ($\nabla$) if $x$ is near the end.
+3.  **Calculate $p$:** Determine the position factor $p = (x_{target} - x_0) / h$.
+4.  **Apply Series:** Substitute the difference values ($\Delta y_0, \Delta^2 y_0, \dots$) and $p$ into the differentiation formula.
+5.  **Scale:** Divide the result by step size $h$ to get the final derivative.
+
+**Pseudocode**
+```text
+Input: Arrays x[] and y[], value xp (point to differentiate at)
+Output: Derivative value dy/dx
+
+1. Calculate step size h = x[1] - x[0]
+2. Generate Forward Difference Table diff[n][n]
+   For j = 1 to n-1:
+       For i = 0 to n-j-1:
+           diff[i][j] = diff[i+1][j-1] - diff[i][j-1]
+
+3. Find index i such that x[i] is closest to xp
+4. Calculate p = (xp - x[i]) / h
+5. Initialize sum = 0
+
+6. Apply Formula (Example for 1st derivative):
+   term1 = diff[i][0]
+   term2 = (2*p - 1) * diff[i][1] / 2
+   term3 = (3*p*p - 6*p + 2) * diff[i][2] / 6
+   ... (continue for higher orders)
+   
+   sum = term1 + term2 + term3 + ...
+
+7. Result = sum / h
+8. Return Result
+```
+**Further Study**
+* [Newton’s Forward Difference Formula for Differentiation - GeeksforGeeks](https://www.geeksforgeeks.org/newtons-forward-difference-formula-for-differentiation/)
+* [Numerical Differentiation - Math.OHIO.edu](https://web.math.ohio.edu.cn/~courses/math3600/Lecture13.pdf)
