@@ -422,4 +422,79 @@ Return coefficients
 * [Polynomial Regression - GeeksforGeeks](https://www.geeksforgeeks.org/polynomial-regression-for-non-linear-data-ml/)
 * [Least Squares Fitting of Polynomials - Wolfram MathWorld](https://mathworld.wolfram.com/LeastSquaresFittingPolynomial.html)
 
+---
+
+## Environment Setup
+
+### Requirements
+- C++ Compiler (GCC / MinGW / Clang)
+- C++11 or later
+
+### Compile & Run
+
+```bash
+g++ code.cpp -o run
+./run
+```
+
+---
+
+## Sample Run
+
+### Input
+
+```text
+Enter number of equations: 3
+Enter coefficients...
+```
+
+### Output
+
+```text
+Solution:
+x = 1.0
+y = 2.0
+z = 3.0
+```
+
+---
+
+## Contribution
+
+### Our Team Contribution
+
+| Full Name | GitHub Username | Roll Number |
+|-----------|-----------------|-------------|
+| MD SUAIB AHMED SAFI | [suaib022](https://github.com/suaib022) | 2207115 |
+| ASHRAFUR RAHMAN NIHAD | [ARN101](https://github.com/ARN101) | 2207116 |
+| DADHICHI SAREKR SHAYON | [Dadhichi-Sarker-Shayon](https://github.com/Dadhichi-Sarker-Shayon) | 2207118 |
+
+- **Member 1:** Method implementation & testing
+- **Member 2:** Mathematical theory & PDFs
+- **Member 3:** Repository structure & documentation
+
+---
+
+## Future Contributions
+
+We welcome contributions! 🙌
+
+**How to contribute:**
+1. Fork the repository
+2. Create a new branch
+3. Add method / optimize code / improve documentation
+4. Submit a pull request
+
+---
+
+## References
+
+1. Chapra, S. C., & Canale, R. P. *Numerical Methods for Engineers*
+2. Burden & Faires, *Numerical Analysis*
+3. NPTEL Lecture Notes on Numerical Methods
+4. *Numerical Methods for Engineers* — Steven Chapra
+5. MIT OpenCourseWare (Numerical Analysis)
+6. NPTEL Numerical Methods
+
+
 
