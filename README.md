@@ -423,20 +423,31 @@ Return coefficients
 * [Least Squares Fitting of Polynomials - Wolfram MathWorld](https://mathworld.wolfram.com/LeastSquaresFittingPolynomial.html)
 
 ---
+## 2. Environment Setup
 
-## Environment Setup
+To run the numerical method implementations in this repository, you will need a standard C++ development environment. All code is written in **Standard C++ (C++11 or later)** to ensure compatibility.
 
-### Requirements
-- C++ Compiler (GCC / MinGW / Clang)
-- C++11 or later
+### Prerequisites
+* **C++ Compiler:** G++ (via MinGW for Windows, or GCC for Linux/macOS).
+* **Code Editor/IDE:** Visual Studio Code (recommended), CLion, or Dev-C++.
 
-### Compile & Run
+### How to Run
+You can compile and run the programs using any IDE or directly from the terminal.
 
-```bash
-g++ code.cpp -o run
-./run
-```
+**Using Terminal (Command Line):**
+1.  Navigate to the directory of the specific method you want to run.
+2.  Compile the source code:
+    ```bash
+    g++ main.cpp -o run
+    ```
+3.  Execute the program:
+    * **Windows:** `run.exe`
+    * **Linux/Mac:** `./run`
 
+**Using VS Code:**
+* Open the folder containing the source code.
+* Ensure the C/C++ extension is installed.
+* Press `Ctrl + Shift + B` (Build) or use the "Run Code" button if you have Code Runner installed.
 ---
 
 ## Sample Run
